@@ -24,7 +24,7 @@ const Upload = (props) => {
     setStatus((prev) => "uploading ..");
     if (files.length !== 0) {
       var uid = "Null";
-      if(props.steps.Complaint_type.value === "Anonomous"){
+      if(props.steps.Complaint_type.value === "Anonymous"){
       firebase.auth().signInAnonymously().catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

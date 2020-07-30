@@ -88,6 +88,7 @@ class Sdrop extends Component {
           <label>Enter PS Region</label>
         </div>
         <input
+          id="new"
           disabled={this.state.disabled}
           onChange={(e) =>
             this.setState({
@@ -123,7 +124,7 @@ class Sdrop extends Component {
                   value: {
                     state: this.state.state,
                     district: this.state.dist,
-                    psregion: this.state.psregion
+                    psregion: this.state.PsRegion
                   },
                 });
               }

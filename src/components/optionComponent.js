@@ -108,7 +108,16 @@ class Review extends Component {
     // this.state.total_list.push(this.state.location);
     // this.state.total_list.push(this.state.doneBy);
     //console.log(this.state.total_list);
-
+    console.log({
+      Attachments: this.state.attachments,
+      created: ""+Date.now()+"",
+      Description: this.state.cl,
+      DoneBy: this.state.doneBy,
+      Location: this.state.location,
+      Place: this.state.stateDist,
+      Status: "Pending",
+      Remarks: "None"
+    })
     const db = firebase.firestore();
     db.collection("Issues")
       .add({
@@ -246,15 +255,15 @@ const STEPS = [
   {
     id: "Non_Cyber",
     message: "How u want Register:",
-    //component: <div><button>Anonomous</button><button>Personal</button></div>,
+    //component: <div><button>Anonymous</button><button>Personal</button></div>,
     trigger: "Complaint_type",
   },
   {
     id: "Complaint_type",
     options: [
       {
-        value: "Anonomous",
-        label: "Anonomous",
+        value: "Anonymous",
+        label: "Anonymous",
         trigger: "Categoty_CRSO",
       },
       {
