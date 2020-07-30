@@ -14,27 +14,35 @@ const theme = {
   userFontColor: "#4a4a4a",
 };
 const config = {
-  width: "50vw",
+  width: "40vw",
   height: "90vh",
   floating: true,
   customDelay: 2000,
   headerTitle: "Crime Regstriation",
 };
 
-
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: ""
+      data: "",
     };
   }
 
-  
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <ChatBot steps={STEPS} {...config} />
+        <ChatBot
+          bubbleStyle={{}}
+          bubbleOptionStyle={{
+            fontWeight: "bold",
+            background: "#f5f8fb",
+            color: "#EF6C00",
+            border: "2px solid #EF6C00",
+          }}
+          steps={STEPS}
+          {...config}
+        />
       </ThemeProvider>
     );
   }

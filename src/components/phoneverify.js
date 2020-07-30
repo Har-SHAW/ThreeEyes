@@ -30,7 +30,8 @@ class PhoneVerify extends Component {
     this.setState({
       isCodeAvailable: false,
       buttonTxt: "Resend OTP",
-      isStatus: false
+      isStatus: true,
+      status: "Please wait ..."
     })
     firebase.auth().settings.appVerificationDisabledForTesting = true;
     const appVerifier = window.recaptchaVerifier;

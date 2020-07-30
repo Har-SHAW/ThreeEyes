@@ -110,7 +110,7 @@ class Review extends Component {
     //console.log(this.state.total_list);
     console.log({
       Attachments: this.state.attachments,
-      created: ""+Date.now()+"",
+      created: ""+Date().toString()+"",
       Description: this.state.cl,
       DoneBy: this.state.doneBy,
       Location: this.state.location,
@@ -122,7 +122,7 @@ class Review extends Component {
     db.collection("Issues")
       .add({
         Attachments: this.state.attachments,
-        created: ""+Date.now()+"",
+        created: ""+Date().toString()+"",
         Description: this.state.cl,
         DoneBy: this.state.doneBy,
         Location: this.state.location,
