@@ -24,125 +24,132 @@ const Upload = (props) => {
     setStatus((prev) => "uploading ..");
     if (files.length !== 0) {
       var uid = "Null";
-      if(props.steps.Complaint_type.value === "Anonymous"){
-      firebase.auth().signInAnonymously().catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          uid = user.uid;
-          const promises = [];
-      files.forEach((file, ind) => {
-        const uploadTask = storage
-          .ref()
-          .child(`${uid}/${file.name}`)
-          .put(file);
-        promises.push(uploadTask);
-        uploadTask.on(
-          "state_changed",
-          (snapShot) => {
-            console.log(snapShot);
-            if (snapShot.bytesTransferred === snapShot.totalBytes) {
+      if (props.steps.Complaint_type.value === "Anonymous") {
+        firebase
+          .auth()
+          .signInAnonymously()
+          .catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+          });
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            uid = user.uid;
+            const promises = [];
+            files.forEach((file, ind) => {
+              const uploadTask = storage
+                .ref()
+                .child(`${uid}/${file.name}`)
+                .put(file);
+              promises.push(uploadTask);
+              uploadTask.on(
+                "state_changed",
+                (snapShot) => {
+                  console.log(snapShot);
+                  if (snapShot.bytesTransferred === snapShot.totalBytes) {
+                    setNum((prev) => {
+                      var lst = prev;
+                      lst[ind] = 1;
+                      return lst;
+                    });
+                  }
+                },
+                (err) => {
+                  setNum((prev) => {
+                    var lst = prev;
+                    lst[ind] = -1;
+                    return lst;
+                  });
+                }
+              );
+            });
+
+            Promise.all(promises)
+              .then(() => {
+                files.forEach((file, i) => {
+                  storage
+                    .ref(uid)
+                    .child(file.name)
+                    .getDownloadURL()
+                    .then((fireBaseUrl) => {
+                      urls.push(fireBaseUrl);
+                      if (i === files.length - 1) {
+                        setStatus((prev) => "uploaded!");
+                        setDisbled((prev) => !prev);
+                        console.log(props.steps.Complaint_type.value);
+                        props.triggerNextStep({
+                          trigger: "Reference",
+                          value: urls,
+                        });
+                      }
+                    });
+                });
+              })
+              .catch((err) => {
+                console.log(err.code);
+                setStatus((prev) => "Some problem occured!");
+                console.log("err2");
+              });
+          }
+        });
+      } else {
+        const promises = [];
+        files.forEach((file, ind) => {
+          const uploadTask = storage
+            .ref()
+            .child(`${props.steps.otp.value.uid}/${file.name}`)
+            .put(file);
+          promises.push(uploadTask);
+          uploadTask.on(
+            "state_changed",
+            (snapShot) => {
+              console.log(snapShot);
+              if (snapShot.bytesTransferred === snapShot.totalBytes) {
+                setNum((prev) => {
+                  var lst = prev;
+                  lst[ind] = 1;
+                  return lst;
+                });
+              }
+            },
+            (err) => {
               setNum((prev) => {
                 var lst = prev;
-                lst[ind] = 1;
+                lst[ind] = -1;
                 return lst;
               });
             }
-          },
-          (err) => {
-            setNum((prev) => {
-              var lst = prev;
-              lst[ind] = -1;
-              return lst;
-            });
-          }
-        );
-      });
-
-      Promise.all(promises)
-        .then(() => {
-          files.forEach((file, i) => {
-            storage
-              .ref(uid)
-              .child(file.name)
-              .getDownloadURL()
-              .then((fireBaseUrl) => {
-                urls.push(fireBaseUrl);
-                if (i === files.length-1) {
-                  setStatus((prev) => "uploaded!");
-                  setDisbled((prev) => !prev);
-                  console.log(props.steps.Complaint_type.value);
-                  props.triggerNextStep({ trigger: "Reference", value: urls });
-                }
-              });
-          });
-        })
-        .catch((err) => {
-          console.log(err.code);
-          setStatus((prev) => "Some problem occured!");
-          console.log("err2");
+          );
         });
-        }
-      });
-    } else{
-      const promises = [];
-      files.forEach((file, ind) => {
-        const uploadTask = storage
-          .ref()
-          .child(`${props.steps.otp.value.uid}/${file.name}`)
-          .put(file);
-        promises.push(uploadTask);
-        uploadTask.on(
-          "state_changed",
-          (snapShot) => {
-            console.log(snapShot);
-            if (snapShot.bytesTransferred === snapShot.totalBytes) {
-              setNum((prev) => {
-                var lst = prev;
-                lst[ind] = 1;
-                return lst;
-              });
-            }
-          },
-          (err) => {
-            setNum((prev) => {
-              var lst = prev;
-              lst[ind] = -1;
-              return lst;
-            });
-          }
-        );
-      });
 
-      Promise.all(promises)
-        .then(() => {
-          files.forEach((file, i) => {
-            storage
-              .ref(props.steps.otp.value.uid)
-              .child(file.name)
-              .getDownloadURL()
-              .then((fireBaseUrl) => {
-                urls.push(fireBaseUrl);
-                if (i === files.length-1) {
-                  setStatus((prev) => "uploaded!");
-                  setDisbled((prev) => !prev);
-                  console.log(props.steps.Complaint_type.value);
-                  props.triggerNextStep({ trigger: "Reference", value: urls });
-                }
-              });
+        Promise.all(promises)
+          .then(() => {
+            files.forEach((file, i) => {
+              storage
+                .ref(props.steps.otp.value.uid)
+                .child(file.name)
+                .getDownloadURL()
+                .then((fireBaseUrl) => {
+                  urls.push(fireBaseUrl);
+                  if (i === files.length - 1) {
+                    setStatus((prev) => "uploaded!");
+                    setDisbled((prev) => !prev);
+                    console.log(props.steps.Complaint_type.value);
+                    props.triggerNextStep({
+                      trigger: "Reference",
+                      value: urls,
+                    });
+                  }
+                });
+            });
+          })
+          .catch((err) => {
+            console.log(err.code);
+            setStatus((prev) => "Some problem occured!");
+            console.log("err2");
           });
-        })
-        .catch((err) => {
-          console.log(err.code);
-          setStatus((prev) => "Some problem occured!");
-          console.log("err2");
-        });
-    }
-      
-      
+      }
     } else {
       setStatus("No files selected!");
     }
@@ -155,21 +162,59 @@ const Upload = (props) => {
           style={{
             width: "100%",
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
             justifyContent: "space-around",
           }}
         >
-          <input
-            disabled={disabled}
-            type="file"
-            className="button1"
-            multiple
-            onChange={onFileChange}
-          ></input>
-          <div style={{ width: "2vw" }} />
-          <button className="button1" disabled={disabled}>
-            UPLOAD
-          </button>
+          <div
+            style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          >
+            <div
+              style={{
+                border: "1px dashed black",
+                borderRadius: "10px",
+                height: "8vw",
+                width: "30vw",
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <span style={{ alignSelf: "center", fontWeight: "bold" }}>
+                Click to add attachments
+              </span>
+
+              <div
+                style={{
+                  height: "8vw",
+                  width: "30vw",
+                  top: "0",
+                  left: "0",
+                  position: "absolute",
+                }}
+              >
+                <input
+                  disabled={disabled}
+                  type="file"
+                  className="uploadBut"
+                  multiple
+                  onChange={onFileChange}
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              margin: "10px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <button className="button1" disabled={disabled}>
+              UPLOAD
+            </button>
+          </div>
         </div>
       </form>
       <div style={{ height: "10px" }} />
@@ -197,9 +242,13 @@ const Upload = (props) => {
           )
         )}
       </div>
-      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-        <label style={{ margin: "10px" }}>{status}</label>
-      </div>
+      {status !== "" ? (
+        <div
+          style={{ display: "flex", width: "100%", justifyContent: "center" }}
+        >
+          <label style={{ margin: "10px" }}>{status}</label>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -180,6 +180,7 @@ const STEPS = [
     id: "Greetings",
     message:
       "Namaste, I am CyberDost! I am here to assist you regarding Cyber Crime Complaints",
+      //component: <Upload/>,
     trigger: "2",
   },
   {

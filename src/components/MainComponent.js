@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components";
 import STEPS from "./optionComponent";
+import avatar from '../police.svg'
+
 const theme = {
   background: "#f5f8fb",
   font: "poppins",
+  fontWeight: "bold",
   headerBgColor: "#EF6C00",
   headerFontColor: "#fff",
   headerFontSize: "15px",
@@ -18,7 +21,7 @@ const config = {
   height: "90vh",
   floating: true,
   customDelay: 2000,
-  headerTitle: "Crime Regstriation",
+  headerTitle: "Crime Regstriation"
 };
 
 class Main extends Component {
@@ -33,12 +36,16 @@ class Main extends Component {
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
-          bubbleStyle={{}}
+          customStyle={{backgroundColor: "white", margin: "20px", borderRadius: "10px",  border: "2px solid #EF6C00"}}
+          botAvatar={avatar}
+          bubbleStyle={{
+            fontWeight: "600"
+          }}
           bubbleOptionStyle={{
-            fontWeight: "bold",
+            fontWeight: "700",
             background: "#f5f8fb",
             color: "#EF6C00",
-            border: "2px solid #EF6C00",
+            border: "1.5px solid #EF6C00",
           }}
           steps={STEPS}
           {...config}

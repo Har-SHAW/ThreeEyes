@@ -67,4 +67,13 @@ transition-duration: 250ms;
   cursor: unset;
 }
 
+
+.uploadBut{
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  object-fit: cover;
+}
+
   
