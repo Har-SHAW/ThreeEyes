@@ -21,8 +21,8 @@ const config = {
   width: "40vw",
   height: "90vh",
   floating: true,
-  botDelay: 0,
-  userDelay: 0,
+  botDelay: 1000,
+  userDelay: 500,
   headerTitle: "Crime Regstriation"
 };
 
