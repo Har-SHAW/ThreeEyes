@@ -8,10 +8,10 @@ class Party extends Component {
           params={{
             particles: {
               number: {
-                value: 200,
+                value: 150,
                 density: {
                   enable: true,
-                  value_area: 800,
+                  value_area: 1800,
                 },
               },
               color: {
@@ -24,7 +24,7 @@ class Party extends Component {
                   color: "#3CA9D1",
                 },
                 polygon: {
-                  nb_sides: 5,
+                  nb_sides: 3,
                 },
                 image: {
                   src: "",
@@ -47,14 +47,14 @@ class Party extends Component {
                 random: false,
                 anim: {
                   enable: false,
-                  speed: 20,
+                  speed: 10,
                   size_min: 0.1,
                   sync: false,
                 },
               },
               line_linked: {
                 enable: true,
-                distance: 100,
+                distance: 175,
                 color: "#3CA9D1",
                 opacity: 1,
                 width: 1,
@@ -83,7 +83,7 @@ class Party extends Component {
                 },
                 onclick: {
                   enable: false,
-                  mode: "push",
+                  mode: "grab",
                 },
                 resize: true,
               },
@@ -102,11 +102,11 @@ class Party extends Component {
                   speed: 3,
                 },
                 repulse: {
-                  distance: 125,
-                  duration: 0.4,
+                  distance: 150,
+                  duration: 0.1,
                 },
                 push: {
-                  particles_nb: 4,
+                  particles_nb: 2,
                 },
                 remove: {
                   particles_nb: 2,

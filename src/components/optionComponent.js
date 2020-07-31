@@ -148,7 +148,7 @@ class Review extends Component {
             <p>Your Data is Saved Succefully</p>
             <p>
               Your Document id is:{" "}
-              <strong style={{ color: "green" }}>{this.state.docId}</strong>
+              <strong style={{ color: "green", border: "1px dashed black", padding: "5px", borderRadius: "5px" }}>{this.state.docId}</strong>
             </p>
           </div>
         </div>
