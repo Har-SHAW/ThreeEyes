@@ -7,7 +7,9 @@ import Check from "./checkComponent";
 import PhoneVerify from "./phoneverify";
 import { firebase } from "./firebase";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import TrackComp from "./searchStatus"
+import TrackComp from "./searchStatus";
+import AddressInput from "./inputAddressComponent";
+
 class Review extends Component {
   constructor(props) {
     super(props);
@@ -18,10 +20,10 @@ class Review extends Component {
       attachments: [],
       location: [],
       doneBy: [],
-      stateDist: []
+      stateDist: [],
     };
   }
-  
+
   componentWillMount() {
     const { steps } = this.props;
     console.log(steps);
@@ -31,7 +33,7 @@ class Review extends Component {
     this.state.cl.push(steps.desc.value);
     this.state.stateDist.push(steps.incident_menu.value.state);
     this.state.stateDist.push(steps.incident_menu.value.district);
-    this.state.stateDist.push(steps.incident_menu.value.psregion)
+    this.state.stateDist.push(steps.incident_menu.value.psregion);
     var i;
     try {
       for (i = 0; i < steps.Upload.value.length; i++)
@@ -42,6 +44,9 @@ class Review extends Component {
         this.state.location.push(
           steps.Loc_Details.value[i].lat + "/" + steps.Loc_Details.value[i].lng
         );
+    } catch {}
+    try {
+      this.state.location.push(steps.Loc_Input.value);
     } catch {}
     try {
       this.state.doneBy.push(steps.Complaint_type.value);
@@ -110,31 +115,31 @@ class Review extends Component {
     //console.log(this.state.total_list);
     console.log({
       Attachments: this.state.attachments,
-      created: ""+Date().toString()+"",
+      created: "" + Date().toString() + "",
       Description: this.state.cl,
       DoneBy: this.state.doneBy,
       Location: this.state.location,
       Place: this.state.stateDist,
       Status: "Pending",
-      Remarks: "None"
-    })
+      Remarks: "None",
+    });
     const db = firebase.firestore();
     db.collection("Issues")
       .add({
         Attachments: this.state.attachments,
-        created: ""+Date().toString()+"",
+        created: "" + Date().toString() + "",
         Description: this.state.cl,
         DoneBy: this.state.doneBy,
         Location: this.state.location,
         Place: this.state.stateDist,
         Status: "Pending",
-        Remarks: "None"
+        Remarks: "None",
       })
       .then((data) => {
         console.log(data.id);
         this.setState({
-          docId: data.id
-        })
+          docId: data.id,
+        });
       })
       .catch((err) => console.log(err));
   }
@@ -146,29 +151,46 @@ class Review extends Component {
         >
           <div>
             <p>Your Data is Saved Succefully</p>
-            <p>
-              Your Document id is:{" "}
-              <strong style={{ color: "green", border: "1px dashed black", padding: "5px", borderRadius: "5px" }}>{this.state.docId}</strong>
-            </p>
+            <p>Your Document id is: </p>
+            <strong
+              style={{
+                margin: "5px",
+                color: "green",
+                border: "1px dashed black",
+                padding: "5px",
+                borderRadius: "5px",
+              }}
+            >
+              {this.state.docId}
+            </strong>
           </div>
         </div>
+        <div style={{height: "10px"}}/>
         <div
           style={{ display: "flex", width: "100%", justifyContent: "center" }}
         >
           {this.state.docId !== "Loading please wait ..." ? (
-            <CopyToClipboard text={this.state.docId}
-              onCopy={() => this.setState({status: "Copied!"})}>
+            <CopyToClipboard
+              text={this.state.docId}
+              onCopy={() => this.setState({ status: "Copied!" })}
+            >
               <button className="button1">Copy id to clipboard</button>
             </CopyToClipboard>
           ) : null}
         </div>
         <div
-          style={{ display: "flex", width: "100%", justifyContent: "center" ,margin:"10px"}}
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            margin: "10px",
+          }}
         >
           {this.state.status !== "" ? (
-            <span style={{color: "green", fontWeight:"bold"}}>{this.state.status}</span>
+            <span style={{ color: "green", fontWeight: "bold" }}>
+              {this.state.status}
+            </span>
           ) : null}
-          
         </div>
       </div>
     );
@@ -180,7 +202,7 @@ const STEPS = [
     id: "Greetings",
     message:
       "Namaste, I am CyberDost! I am here to assist you regarding Cyber Crime Complaints",
-      //component: <Upload/>,
+    //component: <Upload/>,
     trigger: "2",
   },
   {
@@ -210,8 +232,8 @@ const STEPS = [
   },
   {
     id: "TrackComplaint",
-    component: <TrackComp/>,
-    end: true
+    component: <TrackComp />,
+    end: true,
   },
   {
     id: "Report",
@@ -763,7 +785,7 @@ const STEPS = [
       {
         value: "Yes",
         label: "Yes",
-        trigger: "Loc_Details",
+        trigger: "mapOrCustom",
       },
       {
         value: "No",
@@ -773,8 +795,33 @@ const STEPS = [
     ],
   },
   {
+    id: "mapOrCustom",
+    message: "Select a method",
+    trigger: "mapOrCustomOptions",
+  },
+  {
+    id: "mapOrCustomOptions",
+    options: [
+      {
+        value: "Select location on map",
+        label: "Select location on map",
+        trigger: "Loc_Details",
+      },
+      {
+        value: "Enter address manually",
+        label: "Enter address manually",
+        trigger: "Loc_Input",
+      },
+    ],
+  },
+  {
     id: "Loc_Details",
     component: <Popmain />,
+    waitAction: true,
+  },
+  {
+    id: "Loc_Input",
+    component: <AddressInput />,
     waitAction: true,
   },
   {

@@ -3,12 +3,14 @@ import Particles from "react-particles-js";
 class Party extends Component {
   render() {
     return (
-      <div >
+      <div style={{ width: "100%", height: "100%" }}>
         <Particles
+          height="100vh"
+          width="100vw"
           params={{
             particles: {
               number: {
-                value: 150,
+                value: 175,
                 density: {
                   enable: true,
                   value_area: 1800,
@@ -79,17 +81,17 @@ class Party extends Component {
               events: {
                 onhover: {
                   enable: true,
-                  mode: "repulse",
+                  mode: "grab",
                 },
                 onclick: {
                   enable: false,
-                  mode: "grab",
+                  mode: "repulse",
                 },
                 resize: true,
               },
               modes: {
                 grab: {
-                  distance: 100,
+                  distance: 200,
                   line_linked: {
                     opacity: 1,
                   },
@@ -103,7 +105,6 @@ class Party extends Component {
                 },
                 repulse: {
                   distance: 150,
-                  duration: 0.1,
                 },
                 push: {
                   particles_nb: 2,

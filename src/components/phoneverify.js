@@ -27,11 +27,13 @@ class PhoneVerify extends Component {
   onOtpChange = (OTP) => this.setState({ OTP });
 
   PhoneNumberVerify(number) {
+    if(number !== ""){
     this.setState({
       isCodeAvailable: false,
       buttonTxt: "Resend OTP",
       isStatus: true,
-      status: "Please wait ..."
+      status: "Please wait ...",
+      statusColor: "black"
     })
     firebase.auth().settings.appVerificationDisabledForTesting = true;
     const appVerifier = window.recaptchaVerifier;
@@ -56,6 +58,15 @@ class PhoneVerify extends Component {
         });
         console.log("err", error);
       });
+    }else{
+      this.setState({
+        isCodeAvailable: false,
+        buttonTxt: "Send OTP",
+        isStatus: true,
+        status: "Cannot be empty!",
+        statusColor: "red"
+      })
+    }
   }
 
   OTPverify(code, props) {

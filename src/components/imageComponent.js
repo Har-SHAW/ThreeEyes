@@ -24,7 +24,8 @@ const Upload = (props) => {
     setStatus((prev) => "uploading ..");
     if (files.length !== 0) {
       var uid = "Null";
-      if (props.steps.Complaint_type.value === "Anonymous") {
+      console.log(props.steps);
+      if (props.steps.Category.value === "Child Sex Abuse/Rape/Obstacenity" && props.steps.Complaint_type.value === "Anonymous") {
         firebase
           .auth()
           .signInAnonymously()
@@ -173,8 +174,8 @@ const Upload = (props) => {
               style={{
                 border: "1px dashed black",
                 borderRadius: "10px",
-                height: "8vw",
-                width: "30vw",
+                margin: "20px",
+                padding: "50px",
                 position: "relative",
                 display: "flex",
                 justifyContent: "center",
@@ -186,8 +187,6 @@ const Upload = (props) => {
 
               <div
                 style={{
-                  height: "8vw",
-                  width: "30vw",
                   top: "0",
                   left: "0",
                   position: "absolute",

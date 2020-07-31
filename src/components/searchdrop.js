@@ -87,16 +87,18 @@ class Sdrop extends Component {
         >
           <label>Enter PS Region</label>
         </div>
-        <input
-          id="new"
-          disabled={this.state.disabled}
-          onChange={(e) =>
-            this.setState({
-              PsRegion: e.target.value,
-            })
-          }
-          style={{ alignSelf: "center", width: "100%" }}
-        />
+        <div style={{ width: "100%" , display: "flex", justifyContent: "center"}}>
+          <input
+            id="new"
+            disabled={this.state.disabled}
+            onChange={(e) =>
+              this.setState({
+                PsRegion: e.target.value,
+              })
+            }
+            style={{ alignSelf: "center", width: "75%",padding: "10px 5px" }}
+          />
+        </div>
         <div
           style={{
             marginTop: "20px",
@@ -108,7 +110,7 @@ class Sdrop extends Component {
             disabled={this.state.disabled}
             className="button1"
             onClick={() => {
-              if (this.state.state === null || this.state.dist === null) {
+              if (this.state.state === null || this.state.dist === null || this.state.PsRegion === "") {
                 this.setState({
                   status: "Select a valid information!",
                   isStatus: true,
@@ -124,7 +126,7 @@ class Sdrop extends Component {
                   value: {
                     state: this.state.state,
                     district: this.state.dist,
-                    psregion: this.state.PsRegion
+                    psregion: this.state.PsRegion,
                   },
                 });
               }

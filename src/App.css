@@ -74,6 +74,9 @@ transition-duration: 250ms;
   opacity: 0;
   cursor: pointer;
   object-fit: cover;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
 }
 
   
