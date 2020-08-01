@@ -3,12 +3,14 @@ import Upload from "./imageComponent";
 import Popmain from "./popmain";
 import Sdrop from "./searchdrop";
 import Datepic from "./Datepic";
-import Check from "./checkComponent";
 import PhoneVerify from "./phoneverify";
 import { firebase } from "./firebase";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import TrackComp from "./searchStatus";
 import AddressInput from "./inputAddressComponent";
+import Cards from './cardComponent';
+import Safe from '../SafetyComponents/safeComponent';
+import Example from "./platformComponent";
 
 class Review extends Component {
   constructor(props) {
@@ -31,10 +33,13 @@ class Review extends Component {
     this.state.cl.push("" + steps.Select_date.value + "");
     this.state.cl.push(steps.Delay_exp.value);
     this.state.cl.push(steps.desc.value);
+    var i;
+    for(i=0;i<steps.ch_plat.value.platform.length;i++){
+      this.state.cl.push(steps.ch_plat.value.platform[i].value);
+    }
     this.state.stateDist.push(steps.incident_menu.value.state);
     this.state.stateDist.push(steps.incident_menu.value.district);
     this.state.stateDist.push(steps.incident_menu.value.psregion);
-    var i;
     try {
       for (i = 0; i < steps.Upload.value.length; i++)
         this.state.attachments.push(steps.Upload.value[i]);
@@ -96,23 +101,6 @@ class Review extends Component {
         this.state.cl.push(steps.Other.value);
       }
     }
-    /* try{
-            if(steps.Category_1.value) this.state.doneBy.push(steps.Category_1.value);
-            else if(steps.Banking.value)  this.state.doneBy.push(steps.Banking.value);
-            else if(steps.Online.value)  this.state.doneBy.push(steps.Online.value);
-            else if(steps.Email_Fraud.value)  this.state.doneBy.push(steps.Email_Fraud.value);
-            else if(steps.Online_Harassment.value)  this.state.doneBy.push(steps.Online_Harassment.value);
-            else if(steps.Profile_Hacking.value)  this.state.doneBy.push(steps.Profile_Hacking.value);
-            else if(steps.Computer.value)  this.state.doneBy.push(steps.Computer.value);
-            else this.state.doneBy.push(steps.Other.value);
-        }catch{
-
-        } */
-    // this.state.total_list.push(this.state.cl);
-    // this.state.total_list.push(this.state.attachments);
-    // this.state.total_list.push(this.state.location);
-    // this.state.total_list.push(this.state.doneBy);
-    //console.log(this.state.total_list);
     console.log({
       Attachments: this.state.attachments,
       created: "" + Date().toString() + "",
@@ -200,9 +188,7 @@ class Review extends Component {
 const STEPS = [
   {
     id: "Greetings",
-    message:
-      "Namaste, I am CyberDost! I am here to assist you regarding Cyber Crime Complaints",
-    //component: <Upload/>,
+    message: "Namaste, I am CyberDost! I am here to assist you regarding Cyber Crime Complaints",
     trigger: "2",
   },
   {
@@ -221,10 +207,10 @@ const STEPS = [
       {
         value: "Safety",
         label: "Safety Tips",
-        trigger: "Reference",
+        trigger: "Safe",
       },
       {
-        value: "Tract",
+        value: "Track",
         label: "Track the Complaint",
         trigger: "TrackComplaint",
       },
@@ -237,62 +223,27 @@ const STEPS = [
   },
   {
     id: "Report",
-    message: "Do you want to Register Here or on Website",
-    trigger: "Register-Types",
+    message: "Select the Type Of Category from the Below List: ",
+    trigger: "Category",
   },
-  {
-    id: "Register-Types",
-    options: [
-      {
-        value: "Here",
-        label: "On-Chat",
-        trigger: "On-Chat",
-      },
-      {
-        value: "web",
-        label: "WebSite",
-        trigger: "Reference",
-      },
-    ],
-  },
+  /* 
   {
     id: "On-Chat",
     message: "Select Type of Crime:",
     trigger: "Category",
-  },
+  }, */
   {
     id: "Category",
     options: [
       {
         value: "Child Sex Abuse/Rape/Obstacenity",
         label: "Child Sex Abuse/Rape/Obstacenity",
-        trigger: "Non_Cyber",
+        trigger: "Categoty_CRSO",
       },
       {
         value: "Cyber Crime",
         label: "Cyber Crime",
-        trigger: "Cyber",
-      },
-    ],
-  },
-  {
-    id: "Non_Cyber",
-    message: "How u want Register:",
-    //component: <div><button>Anonymous</button><button>Personal</button></div>,
-    trigger: "Complaint_type",
-  },
-  {
-    id: "Complaint_type",
-    options: [
-      {
-        value: "Anonymous",
-        label: "Anonymous",
-        trigger: "Categoty_CRSO",
-      },
-      {
-        value: "Personal",
-        label: "Personal",
-        trigger: "Authentication",
+        trigger: "Cyber_type",
       },
     ],
   },
@@ -307,162 +258,64 @@ const STEPS = [
       {
         value: "Child Pornography",
         label: "Child Pornography",
-        trigger: "Date_module",
+        trigger: "Register-Types",
       },
       {
         value: "Rape/Gang Rape",
         label: "Rape/Gang Rape",
-        trigger: "Date_module",
+        trigger: "Register-Types",
       },
       {
         value: "Sexual Obscenity",
         label: "Sexual Obscenity",
-        trigger: "Date_module",
+        trigger: "Register-Types",
       },
       {
         value: "Sexually Explicit",
         label: "Sexually Explicit",
-        trigger: "Date_module",
+        trigger: "Register-Types",
       },
     ],
   },
   {
-    id: "Cyber",
-    message: "Verifying your Identification:",
-    trigger: "Authentication",
+	id: "Register-Types",
+	message: 'Select the Services u want: ',
+	trigger: 'reg_op',
   },
   {
-    id: "Authentication",
-    message: "Enter Your Mobile Number?",
-    trigger: "otp",
-  },
-  /* {
-        id: 'phone_no',
-        user: true,
-        trigger: 're-check',
-        validator: (value) => {
-            if (isNaN(value)) {
-              return 'value must be a number';
-            } else if (value < 0) {
-              return 'value must be positive';
-            }
-            return true;
-          },
-    },
-    {
-        id: 're-check',
-        message: 'Do you want Continue or change phone number',
-        trigger: 'check-option'
-    },
-    {
-        id: 'check-option',
-        options: [
-            {
-                value: 'yes',
-                label: 'YES',
-                trigger: 'Authentication',
-            },
-            {
-                value: 'no',
-                label: 'NO',
-                trigger: 'otp',
-            }
-        ],
-    }, */
-  {
-    id: "otp",
-    component: <PhoneVerify />,
-    waitAction: true,
-  },
-  /* {
-        id: 'otp',
-        message: 'Enter OTP which is sent to your mobile',
-        trigger: 'otp_value',
-    },
-    {
-        id: 'otp_value',
-        user: true,
-        trigger: 'Name',
-        validator: (value) => {
-            if (isNaN(value)) {
-              return 'value must be a number';
-            } else if (value < 0) {
-              return 'value must be positive';
-            }
-            return true;
-          },
-    }, */
-  /* {
-        id: 'verification',
-        component: '',
-        waitAction: true,
-    }, */
-  /* {
-        id: 'Wrong',
-        message: 'Please Enter Correct OTP',
-        trigger: 'otp_value',
-    }, */
-  {
-    //from component
-    id: "Name",
-    message: "What is your name?",
-    trigger: "name",
-  },
-  {
-    id: "name",
-    user: true,
-    trigger: "email-id",
-  },
-  {
-    id: "email-id",
-    message: "Enter Email:",
-    trigger: "email",
-  },
-  {
-    id: "email",
-    user: true,
-    trigger: "Official_doc",
-  },
-  {
-    id: "Official_doc",
-    message: "Select the Proof of Identity",
-    trigger: "POF",
-  },
-  {
-    id: "POF",
+	id: 'reg_op',
     options: [
       {
-        value: "Aadhar",
-        label: "Aadhar Number",
-        trigger: "pof_input",
+        value: "Here",
+        label: "On-Chat Register Complaint",
+        trigger: "comp",
       },
       {
-        value: "PAN Card",
-        label: "PAD Card",
-        trigger: "pof_input",
-      },
-      {
-        value: "Voter",
-        label: "Voter ID",
-        trigger: "pof_input",
+        value: "Information",
+        label: "Information",
+        trigger: "Modal_1",
       },
     ],
   },
   {
-    id: "pof_input",
-    message: "Enter {previousValue} number!",
-    trigger: "number_pof",
+	  id: 'comp',
+	  message: 'Select How u want to Register:',
+	  trigger: 'Complaint_type'
   },
   {
-    id: "number_pof",
-    user: true,
-    trigger: "Crime_type",
-  },
-  {
-    id: "Crime_type",
-    component: <Check />,
-    asMessage: true,
-    waitAction: true,
+    id: "Complaint_type",
+    options: [
+      {
+        value: "Anonymous",
+        label: "Anonymous",
+        trigger: "Date_module",
+      },
+      {
+        value: "Personal",
+        label: "Personal",
+        trigger: "Authentication",
+      },
+    ],
   },
   {
     id: "Cyber_type",
@@ -530,22 +383,22 @@ const STEPS = [
       {
         value: "Misuse of Credit/Debit Card/ATM Fraud",
         label: "Misuse of Credit/Debit Card/ATM Fraud",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Unauthorized Access Through Internet Banking",
         label: "Unauthorized Access Through Internet Banking",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Cryptocurrency/Bitcoin",
         label: "Cryptocurrency/Bitcoin",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "E-Wallet Fraud,Demat/Mutual Fund",
         label: "E-Wallet Fraud,Demat/Mutual Fund",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
@@ -560,12 +413,12 @@ const STEPS = [
       {
         value: "online Job Fraud",
         label: "online Job Fraud",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Online Matrimonial Fraud",
         label: "Online Matrimonial Fraud",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
@@ -580,32 +433,32 @@ const STEPS = [
       {
         value: "Spoof Email",
         label: "Spoof Email",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Business Email",
         label: "Business Email",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Compromise",
         label: "Compromise",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Email Hacking",
         label: "Email Hacking",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Threatening Email",
         label: "Threatening Email",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Phishing Email",
         label: "Phishing Email",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
@@ -620,12 +473,12 @@ const STEPS = [
       {
         value: "Receving Offensive Messages",
         label: "Receving Offensive Messages",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Online Bulying/Stalking",
         label: "Online Bulying/Stalking",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
@@ -660,17 +513,17 @@ const STEPS = [
       {
         value: "Identity Theft",
         label: "Identity Theft",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Fake Profile",
         label: "Fake Profile",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Cheating by Impersonation",
         label: "Cheating by Impersonation",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
@@ -685,22 +538,22 @@ const STEPS = [
       {
         value: "Damage to computer",
         label: "Damage to computer",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Data Breach",
         label: "Data Breach",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "Altered Computer program",
         label: "Altered Computer program",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "ransomware",
         label: "ransomware",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
@@ -715,25 +568,125 @@ const STEPS = [
       {
         value: "Online Anti National/Communal Hatred/Terror Activity",
         label: "Online Anti National/Communal Hatred/Terror Activityr",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "online prostitution/Human Trafficking",
         label: "online prostitution/Human Trafficking",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "online Gambling",
         label: "online Gambling",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
       {
         value: "other",
         label: "other",
-        trigger: "Date_module",
+        trigger: "reg_type",
       },
     ],
   },
+  {
+	  id: 'reg_type',
+	  message: 'select the Service You want :',
+	  trigger: 'process',
+  },
+  {
+	  id: 'process',
+	  options: [
+		  {
+			  label: 'On-Chat Register Complaint',
+			  value: 'oc',
+			  trigger: 'Authentication',
+		  },
+		  {
+			  label: 'Information',
+			  value:'in',
+			  trigger: 'Modal_1'
+		  },
+	  ],
+  },
+
+
+
+/* Authentication Module */
+
+
+  {
+    id: "Authentication",
+    message: "Enter Your Mobile Number?",
+    trigger: "otp",
+  },
+  {
+    id: "otp",
+    component: <PhoneVerify />,
+    waitAction: true,
+  },
+
+  {
+    id: "Name",
+    message: "What is your name?",
+    trigger: "name",
+  },
+  {
+    id: "name",
+    user: true,
+    trigger: "email-id",
+  },
+  {
+    id: "email-id",
+    message: "Enter Email:",
+    trigger: "email",
+  },
+  {
+    id: "email",
+    user: true,
+    trigger: "Official_doc",
+  },
+  {
+    id: "Official_doc",
+    message: "Select the Proof of Identity",
+    trigger: "POF",
+  },
+  {
+    id: "POF",
+    options: [
+      {
+        value: "Aadhar",
+        label: "Aadhar Number",
+        trigger: "pof_input",
+      },
+      {
+        value: "PAN Card",
+        label: "PAD Card",
+        trigger: "pof_input",
+      },
+      {
+        value: "Voter",
+        label: "Voter ID",
+        trigger: "pof_input",
+      },
+    ],
+  },
+  {
+    id: "pof_input",
+    message: "Enter {previousValue} number!",
+    trigger: "number_pof",
+  },
+  {
+    id: "number_pof",
+    user: true,
+    trigger: "Date_module",
+  },
+
+
+/* Authentication Module Ends */
+
+
+
+
+/* Date Module Begins  */
   {
     id: "Date_module",
     message: "Select the Date of happened?:",
@@ -772,7 +725,17 @@ const STEPS = [
   {
     id: "desc",
     user: true,
-    trigger: "Location",
+    trigger: "plat",
+  },
+  {
+	id: 'plat',
+	message: 'Choose Platform if u say in Online:',
+	trigger: 'ch_plat',
+  },
+  {
+	id: 'ch_plat',
+	component: <Example />,
+	waitAction: true,
   },
   {
     id: "Location",
@@ -853,7 +816,24 @@ const STEPS = [
     id: "Reference",
     component: <Review />,
     end: true,
-  },
+},
+	/* Card Component */
+	{
+		id: 'Modal_1',
+		component: <Cards />,
+		end: true,
+	},
+
+	/* Modal */
+	{
+		id: 'Safe',
+		component: <Safe />,
+		end: true,
+	},
+
 ];
+
+
+
 
 export default STEPS;
