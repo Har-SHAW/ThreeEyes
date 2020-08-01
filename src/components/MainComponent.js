@@ -3,7 +3,6 @@ import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components";
 import STEPS from "./optionComponent";
 import avatar from '../police.svg'
-import icon from '../home.png'
 
 const theme = {
   background: "#f5f8fb",
@@ -39,7 +38,6 @@ class Main extends Component {
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
-          floatingIcon={icon}
           customStyle={{backgroundColor: "white", margin: "20px", borderRadius: "10px",  border: "2px solid #EF6C00"}}
           botAvatar={avatar}
           bubbleStyle={{

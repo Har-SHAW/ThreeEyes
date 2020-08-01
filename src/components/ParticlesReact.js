@@ -10,10 +10,10 @@ class Party extends Component {
           params={{
             particles: {
               number: {
-                value: 175,
+                value: 150,
                 density: {
                   enable: true,
-                  value_area: 1800,
+                  value_area: 2000,
                 },
               },
               color: {
@@ -56,7 +56,7 @@ class Party extends Component {
               },
               line_linked: {
                 enable: true,
-                distance: 175,
+                distance: 200,
                 color: "#3CA9D1",
                 opacity: 1,
                 width: 1,
@@ -81,7 +81,7 @@ class Party extends Component {
               events: {
                 onhover: {
                   enable: true,
-                  mode: "grab",
+                  mode: "repulse",
                 },
                 onclick: {
                   enable: false,
@@ -104,7 +104,8 @@ class Party extends Component {
                   speed: 3,
                 },
                 repulse: {
-                  distance: 150,
+                  distance: 75,
+                  duration: 2
                 },
                 push: {
                   particles_nb: 2,
