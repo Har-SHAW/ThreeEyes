@@ -78,7 +78,6 @@ const Upload = (props) => {
                       if (i === files.length - 1) {
                         setStatus((prev) => "uploaded!");
                         setDisbled((prev) => !prev);
-                        console.log(props.steps.Complaint_type.value);
                         props.triggerNextStep({
                           trigger: "Reference",
                           value: urls,
