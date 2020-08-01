@@ -23,7 +23,7 @@ const config = {
   floating: true,
   botDelay: 1000,
   userDelay: 500,
-  headerTitle: "Crime Regstriation"
+  headerTitle: "Tri-Nethra"
 };
 
 class Main extends Component {

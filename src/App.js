@@ -5,7 +5,7 @@ import Party from "./components/ParticlesReact";
 class App extends Component {
   render() {
     return (
-      <div style={{backgroundColor: "#282828", overflow: "hidden"}}>
+      <div style={{backgroundColor: "#282828", height: "100vh", width: "100vw"}}>
         <Main />
         <Party/>
       </div>

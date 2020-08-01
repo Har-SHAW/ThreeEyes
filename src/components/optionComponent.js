@@ -31,7 +31,6 @@ class Review extends Component {
     console.log(steps);
     if ("") console.log("Yes it is present");
     this.state.cl.push("" + steps.Select_date.value + "");
-    this.state.cl.push(steps.Delay_exp.value);
     this.state.cl.push(steps.desc.value);
     var i;
     for(i=0;i<steps.ch_plat.value.platform.length;i++){
@@ -162,7 +161,9 @@ class Review extends Component {
               text={this.state.docId}
               onCopy={() => this.setState({ status: "Copied!" })}
             >
-              <button className="button1">Copy id to clipboard</button>
+              <button className="button1" onClick={() => {
+                this.props.triggerNextStep({trigger: 'end_greet'})
+              }}>Copy id to clipboard</button>
             </CopyToClipboard>
           ) : null}
         </div>
@@ -188,11 +189,36 @@ class Review extends Component {
 const STEPS = [
   {
     id: "Greetings",
-    message: "Namaste, I am CyberDost! I am here to assist you regarding Cyber Crime Complaints",
+    message: "Hello there , I am Tri-Nethra - The CyberBot.",
     trigger: "2",
   },
   {
     id: "2",
+    message: "My job is to make your cyber experience safe and secure.",
+    trigger: "3",
+  },
+  {
+    id: "3",
+    message: " I can do these for you :",
+    trigger: "3.1",
+  },
+  {
+    id: "3.1",
+    message: " 1 . Register a complaint by myself or redirect to the official portal as you wish. ",
+    trigger: "3.2",
+  },
+  {
+    id: '3.2',
+    message: " 2 . Fetch you the current status of your complaint from our database",
+    trigger: "3.3",
+  },
+  {
+    id: '3.3',
+    message: " 3 . Enlighten you with several safety tips that you might want to follow so that you would use me less in future :)",
+    trigger: "serv",
+  },
+  {
+    id: "serv",
     message: "Select the Type of Service:",
     trigger: "Service",
   },
@@ -698,16 +724,6 @@ const STEPS = [
     waitAction: true,
   },
   {
-    id: "Delay",
-    message: "Explain why there is Delay in register:",
-    trigger: "Delay_exp",
-  },
-  {
-    id: "Delay_exp",
-    user: true,
-    trigger: "incident_area",
-  },
-  {
     id: "incident_area",
     message: "Select State and District:",
     trigger: "incident_menu",
@@ -815,20 +831,45 @@ const STEPS = [
   {
     id: "Reference",
     component: <Review />,
-    end: true,
+    waitAction: true,
+},
+{
+  id: 'end_greet',
+  message: 'Do not worry and have faith in our law enforcement system. You will never be deprived of justice. Do you want me to carry out any other functionality? ',
+  trigger: 'loop',
+},
+{
+  id: 'loop',
+  options:[
+    {
+      value: 'y',
+      label: 'Yes',
+      trigger: 'Greetings',
+    },
+    {
+      value: 'n',
+      label: 'No',
+      trigger: 'final_end',
+    },
+  ]
+},
+{
+  id: 'final_end',
+  message: '$Thank You for using me. I am always available just a click away for your service . Bye',
+  end: true,
 },
 	/* Card Component */
 	{
 		id: 'Modal_1',
 		component: <Cards />,
-		end: true,
+		waitAction: true,
 	},
 
 	/* Modal */
 	{
 		id: 'Safe',
 		component: <Safe />,
-		end: true,
+		waitAction: true,
 	},
 
 ];

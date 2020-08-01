@@ -56,6 +56,9 @@ class Safe extends Component{
             isModalOpen7: !this.state.isModalOpen7
         });
     }
+    componentWillMount(){
+        this.props.triggerNextStep({trigger: 'end_greet'})
+    }
     render(){
         return(
             <React.Fragment>
@@ -63,7 +66,6 @@ class Safe extends Component{
                         <CardTitle style={{color: 'black'}}>Safety Tips</CardTitle>
                         <CardBody style={{color: 'white'}}>
                             <Button className="bg-primary btn-block" onClick={this.toggleModal1} style={{marginBottom: '20px'}}>  Online Fraud/Scam </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal2} style={{marginBottom: '20px'}}> Social Media Safety </Button>
                             <Button className="bg-primary btn-block" onClick={this.toggleModal2} style={{marginBottom: '20px'}}> Social Media Safety </Button>
                             <Button className="bg-primary btn-block" onClick={this.toggleModal3} style={{marginBottom: '20px'}}> Online Bullying </Button>
                             <Button className="bg-primary btn-block" onClick={this.toggleModal4} style={{marginBottom: '20px'}}> Financial Fraud </Button>
