@@ -1,20 +1,13 @@
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+https://us-central1-webappmedia-2aa4d.cloudfunctions.net/dialogflowGateway
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyB92FS3OWMQ1BzrUkDYbu0WQaEEcNfevNc",
-    authDomain: "crime-17ca7.firebaseapp.com",
-    databaseURL: "https://crime-17ca7.firebaseio.com",
-    projectId: "crime-17ca7",
-    storageBucket: "crime-17ca7.appspot.com",
-    messagingSenderId: "736939015475",
-    appId: "1:736939015475:web:b9b84e2c02a3d1ff525246"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+
+{
+    "sessionId": "shaw",
+    "queryInput": {
+        "text": {
+            "text": "i lost my money on banking",
+            "languageCode": "en-US"
+        }
+    }
+}

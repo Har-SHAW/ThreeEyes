@@ -13,7 +13,7 @@ class Party extends Component {
                 value: 150,
                 density: {
                   enable: true,
-                  value_area: 2000,
+                  value_area: 1800,
                 },
               },
               color: {
@@ -104,8 +104,9 @@ class Party extends Component {
                   speed: 3,
                 },
                 repulse: {
-                  distance: 75,
+                  distance: 150,
                   duration: 2
+                  
                 },
                 push: {
                   particles_nb: 2,

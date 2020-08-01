@@ -26,7 +26,7 @@ class Cards extends Component {
                     <Card body inverse color="info">
                         <CardBody>
                             <div>
-                                <img src="home.png" width='40px' height='40px' alt="logo"></img> Go to <a href="https://www.cybercrime.gov.in" target="_blank" rel="">www.cybercrime.gov.in</a> and click on "Report Anonymously" under {this.state.cat} related Crime<br></br>
+                                <img src="home.png" width='40px' height='40px' alt="logo"></img> Go to <a href="https://www.cybercrime.gov.in">www.cybercrime.gov.in</a> and click on "Report Anonymously" under {this.state.cat} related Crime<br></br>
                             </div>
                         </CardBody>
                     </Card>

@@ -9,8 +9,9 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import TrackComp from "./searchStatus";
 import AddressInput from "./inputAddressComponent";
 import Cards from './cardComponent';
-import Safe from '../SafetyComponents/safeComponent';
 import Example from "./platformComponent";
+import AIChat from './AIChat';
+//import Safe from '../SafetyComponents/safeComponent';
 
 class Review extends Component {
   constructor(props) {
@@ -187,6 +188,7 @@ class Review extends Component {
 }
 
 const STEPS = [
+  
   {
     id: "Greetings",
     message: "Hello there , I am Tri-Nethra - The CyberBot.",
@@ -866,11 +868,26 @@ const STEPS = [
 	},
 
 	/* Modal */
-	{
-		id: 'Safe',
-		component: <Safe />,
-		waitAction: true,
-	},
+	// {
+	// 	id: 'Safe',
+	// 	component: <Safe />,
+	// 	waitAction: true,
+  // },
+  {
+    id: "Safe",
+    message: "Hello i am a AI Chat bot, you can talk with me :)",
+    trigger: "zero"
+  },
+  {
+    id: "zero",
+    user: true,
+    trigger: "zero1"
+  },
+  {
+    id: "zero1",
+    component: <AIChat/>,
+    waitAction: true
+  },
 
 ];
 

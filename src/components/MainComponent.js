@@ -10,7 +10,7 @@ const theme = {
   fontWeight: "bold",
   headerBgColor: "#EF6C00",
   headerFontColor: "#fff",
-  headerFontSize: "15px",
+  headerFontSize: "16px",
   botBubbleColor: "#EF6C00",
   botFontColor: "#fff",
   userBubbleColor: "#fff",
@@ -26,19 +26,12 @@ const config = {
 };
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      opened: true,
-      data: "",
-    };
-  }
 
   render() {
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
-          customStyle={{backgroundColor: "white", margin: "20px", borderRadius: "10px",  border: "2px solid #EF6C00"}}
+          customStyle={{backgroundColor: "white", margin: "20px", borderRadius: "20px 20px 20px 0px",  border: "2px solid #EF6C00"}}
           botAvatar={avatar}
           bubbleStyle={{
             fontWeight: "600"

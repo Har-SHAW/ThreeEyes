@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div
-        style={{ backgroundColor: "white", height: "100vh", width: "100vw" }}
+        style={{ backgroundColor: "white", height: "100vh", width: "100vw", overflow: "hidden" }}
       >
         <Main />
         <Party />
