@@ -42,7 +42,7 @@ class InputComp extends Component {
               }
             }}
           >
-            Set address
+            {this.props.steps.lang.value === ""?"Set address":"पता सेट करें"}
           </button>
           {this.state.status !== "" ? (
             <span style={{ color: this.state.statusColor }}>

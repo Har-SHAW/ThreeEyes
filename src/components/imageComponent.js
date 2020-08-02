@@ -21,7 +21,7 @@ const Upload = (props) => {
 
   const onUploadSubmission = (e) => {
     e.preventDefault();
-    setStatus((prev) => "uploading ..");
+    setStatus((prev) => props.steps.lang.value === ""?"uploading ..":"अपलोडिंग");
     if (files.length !== 0) {
       var uid = "Null";
       console.log(props.steps);
@@ -88,7 +88,7 @@ const Upload = (props) => {
               })
               .catch((err) => {
                 console.log(err.code);
-                setStatus((prev) => "Some problem occured!");
+                setStatus((prev) => props.steps.lang.value === ""?"Some problem occured!":"कुछ समस्या हुई!");
                 console.log("err2");
               });
           }
@@ -145,12 +145,12 @@ const Upload = (props) => {
           })
           .catch((err) => {
             console.log(err.code);
-            setStatus((prev) => "Some problem occured!");
+            setStatus((prev) => props.steps.lang.value === ""?"Some problem occured!":"कुछ समस्या हुई!");
             console.log("err2");
           });
       }
     } else {
-      setStatus("No files selected!");
+      setStatus(props.steps.lang.value === ""?"No files selected!":"कोई फ़ाइल चयनित नहीं है");
     }
   };
 
@@ -180,7 +180,7 @@ const Upload = (props) => {
               }}
             >
               <span style={{ alignSelf: "center", fontWeight: "bold" }}>
-                Click to add attachments
+                {props.steps.lang.value === ""?"Click to add attachments":"लगाव जोड़ने के लिए क्लिक करें"}
               </span>
 
               <div
@@ -209,7 +209,7 @@ const Upload = (props) => {
             }}
           >
             <button className="button1" disabled={disabled}>
-              UPLOAD
+              {props.steps.lang.value === ""?"UPLOAD":"पता सेट करें"}
             </button>
           </div>
         </div>

@@ -12,7 +12,7 @@ import Cards from "./cardComponent";
 import Example from "./platformComponent";
 import AIChat from "./AIChat";
 import Safe from "../SafetyComponents/safeComponent";
-//import PopPdf from "./popPdf"
+import PopPdf from "./popPdf"
 
 class Review extends Component {
   constructor(props) {
@@ -144,40 +144,6 @@ class Review extends Component {
       }
       for (i = 0; i < steps[this.props.steps.lang.value+"zero1"].value.length; i++)
           this.state.cl.push(steps[this.props.steps.lang.value+"zero1"].value[i]);
-      // if (
-      //   this.state.cl[this.state.cl.length - 1] ===
-      //   "Child Sex Abuse/Rape/Obstacenity"
-      // )
-      //   this.state.cl.push(steps[this.props.steps.lang.value+"Category_1"].value);
-      // else if (this.state.cl[this.state.cl.length - 1] === "Cyber Crime") {
-      //   this.state.cl.push(steps[this.props.steps.lang.value+"Category_2.value);
-      //   if (steps[this.props.steps.lang.value+"Category_2.value === "Loss of Money") {
-      //     if ("Banking" in steps) {
-      //       this.state.cl.push("Banking/E-Wallet/Demat");
-      //       this.state.cl.push(steps[this.props.steps.lang.value+"Banking.value);
-      //     } else if ("Online" in steps) {
-      //       this.state.cl.push(
-      //         "Job/Matrimonial,E-commerce,Fradulent SMS/Media Content/call"
-      //       );
-      //       this.state.cl.push(steps[this.props.steps.lang.value+"Online.value);
-      //     } else if ("Email_Fraud" in steps) {
-      //       this.state.cl.push("Email Fraud");
-      //       this.state.cl.push(steps[this.props.steps.lang.value+"Email_Fraud.value);
-      //     }
-      //   } else if (steps[this.props.steps.lang.value+"Category_2.value === "Online Harassment") {
-      //     this.state.cl.push(steps[this.props.steps.lang.value+"Online_Harassment.value);
-      //   } else if (steps[this.props.steps.lang.value+"Category_2.value === "Hacking") {
-      //     if ("Profile_Hacking" in steps) {
-      //       this.state.cl.push("Profile Hacking");
-      //       this.state.cl.push(steps[this.props.steps.lang.value+"Profile_Hacking.value);
-      //     } else if ("Computer" in steps) {
-      //       this.state.cl.push("Computer Hacking");
-      //       this.state.cl.push(steps[this.props.steps.lang.value+"Computer.value);
-      //     }
-      //   } else {
-      //     this.state.cl.push(steps[this.props.steps.lang.value+"Other.value);
-      //   }
-      //
     }
     console.log({
       Attachments: this.state.attachments,
@@ -1033,8 +999,8 @@ const STEPS = [
 
   {
     id: "Greetings",
-    message: "Hello there , I am Tri-Nethra - The CyberBot.",
-    //component: <PopPdf/>,
+    //message: "Hello there , I am Tri-Nethra - The CyberBot.",
+    component: <PopPdf/>,
     trigger: "2",
   },
   {

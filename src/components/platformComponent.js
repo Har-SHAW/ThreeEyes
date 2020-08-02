@@ -38,7 +38,7 @@ class Example extends Component {
               });
             }}
           >
-            Save
+            {this.props.steps.lang.value === ""?"Save":"सहेजें"}
           </button>
         </div>
       </div>

@@ -1,21 +1,29 @@
 import React, { Component } from "react";
 import { Document, Page } from "react-pdf/dist/entry.webpack";
-import sample from "./fraud.pdf";
+import jobF from "../components/jobFraud.pdf"
+import MatrimonialF  from "./matrimonialFraud.pdf"
+import securityA from "../components/securityAwareness.pdf"
+import socialAwareness from "../components/socialMedia.pdf"
 
+const list = []
 class Pdf extends Component {
-  state = { numPages: null, pageNumber: 1 };
+
+ SimpleList = () => (
+   <div>
+      {list.map(item => (
+        <Page pageNumber={item} width={450}>{item}</Page>
+      ))}
+      </div>
+  );
 
   onDocumentLoadSuccess = ({ numPages }) => {
-    this.setState({ numPages });
+    for(var i =1;i <= numPages; i++){
+      list.push(i);
+    }
   };
 
-  goToPrevPage = () =>
-    this.setState((state) => ({ pageNumber: state.pageNumber - 1 }));
-  goToNextPage = () =>
-    this.setState((state) => ({ pageNumber: state.pageNumber + 1 }));
 
   render() {
-    const { pageNumber, numPages } = this.state;
 
     return (
       <div>
@@ -31,14 +39,10 @@ class Pdf extends Component {
         </nav>
 
         <div>
-          <Document file={sample} onLoadSuccess={this.onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} width={450}/>
+          <Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <this.SimpleList/>
           </Document>
         </div>
-
-        {/* <p>
-          Page {pageNumber} of {numPages}
-        </p> */}
       </div>
     );
   }

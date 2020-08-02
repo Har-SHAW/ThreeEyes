@@ -77,7 +77,7 @@ class PopMain extends Component {
             disabled={this.state.disabled}
             onClick={this.togglePopup.bind(this)}
           >
-            Show Map
+            {this.props.steps.lang.value === ""?"Show map":"पता सेट करें"}
           </button>
           {this.state.showPopup ? (
             <Popup

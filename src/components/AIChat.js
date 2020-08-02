@@ -10,15 +10,29 @@ class AIChat extends Component {
   }
 
   async makeReq() {
-    const params = {
-      sessionId: "shaw",
-      queryInput: {
-        text: {
-          text: this.props.previousStep.value,
-          languageCode: "en-US",
+    var params;
+    if(this.props.steps.lang.value === ""){
+      params = {
+        sessionId: "shaw",
+        queryInput: {
+          text: {
+            text: this.props.previousStep.value,
+            languageCode: "en-US",
+          },
         },
-      },
-    };
+      };
+    }else{
+      params = {
+        sessionId: "shawHindi",
+        queryInput: {
+          text: {
+            text: this.props.previousStep.value,
+            languageCode: "hi-IN",
+          },
+        },
+      };
+    }
+    
     let res = await axios.post('https://us-central1-webappmedia-2aa4d.cloudfunctions.net/dialogflowGateway', params);
     // let res = await axios.post(
     //   "https://us-central1-crime-17ca7.cloudfunctions.net/dialogflowGateway",

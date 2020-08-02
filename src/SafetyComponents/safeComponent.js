@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import { Modal, ModalHeader, Button, ModalBody, Card, CardBody, CardSubtitle, CardTitle } from 'reactstrap';
+import jobF from "../components/jobFraud.pdf"
+import MatrimonialF  from "../components/matrimonialFraud.pdf"
+import securityA from "../components/securityAwareness.pdf"
+import socialAwareness from "../components/socialMedia.pdf"
+import Poppdf from "../components/popPdf.js"
 
 class Safe extends Component{
     constructor(props){
@@ -62,6 +67,7 @@ class Safe extends Component{
     render(){
         return(
             <React.Fragment>
+                <Poppdf Pdfsrc={"mfraud"}/>
                 <Card body inverse color="white">
                         <CardTitle style={{color: 'black'}}>Safety Tips</CardTitle>
                         <CardBody style={{color: 'white'}}>

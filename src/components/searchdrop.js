@@ -5,8 +5,8 @@ import slst from "./StateDistrict";
 //import PS_In from "./psComponent";
 
 class Sdrop extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       state: null,
       dist: null,
@@ -33,7 +33,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>Select state</label>
+          <label>{this.props.steps.lang.value === ""?"Select state":"राज्य चुनें"}</label>
         </div>
         <Select
           isDisabled={this.state.disabled}
@@ -66,7 +66,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>Select district</label>
+          <label>{this.props.steps.lang.value === ""?"Select district":"जिले का चयन करें"}</label>
         </div>
         <Select
           isDisabled={this.state.disabled || this.state.distDisable}
@@ -87,7 +87,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>Enter PS Region/Pin Code</label>
+          <label>{this.props.steps.lang.value === ""?"Enter PS Region/Pin Code":"PS क्षेत्र दर्ज करें/पिन कोड"}</label>
         </div>
         <div
           style={{
@@ -150,7 +150,7 @@ class Sdrop extends Component {
               }
             }}
           >
-            Set value
+            {this.props.steps.lang.value === ""?"Set value":"मूल्य ते करना"}
           </button>
         </div>
         {this.state.isStatus ? (
