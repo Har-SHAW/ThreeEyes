@@ -130,7 +130,7 @@ class Sdrop extends Component {
                 this.state.PsRegion === ""
               ) {
                 this.setState({
-                  status: "Select a valid information!",
+                  status: this.props.steps.lang.value===""?"Select a valid information!":"एक मान्य जानकारी का चयन करें!",
                   isStatus: true,
                 });
               } else {

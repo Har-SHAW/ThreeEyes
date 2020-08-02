@@ -67,7 +67,6 @@ class Safe extends Component{
     render(){
         return(
             <React.Fragment>
-                <Poppdf Pdfsrc={"mfraud"}/>
                 <Card body inverse color="white">
                         <CardTitle style={{color: 'black'}}>Safety Tips</CardTitle>
                         <CardBody style={{color: 'white'}}>

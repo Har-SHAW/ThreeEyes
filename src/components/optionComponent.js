@@ -12,7 +12,7 @@ import Cards from "./cardComponent";
 import Example from "./platformComponent";
 import AIChat from "./AIChat";
 import Safe from "../SafetyComponents/safeComponent";
-import PopPdf from "./popPdf"
+import PopPdf from "./popPdf";
 
 class Review extends Component {
   constructor(props) {
@@ -1004,8 +1004,8 @@ const STEPS = [
 
   {
     id: "Greetings",
-    //message: "Hello there , I am Tri-Nethra - The CyberBot.",
-    component: <PopPdf/>,
+    message: "Hello there , I am Tri-Nethra - The CyberBot.",
+    //component: <PopPdf/>,
     trigger: "2",
   },
   {
