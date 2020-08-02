@@ -96,23 +96,23 @@ class Sdrop extends Component {
             justifyContent: "center",
           }}
         ></div>
-        <Select
+        {/* <Select
           isDisabled={this.state.disabled || this.state.distDisable}
           onChange={(val) => {
             this.setState({ PsRegion: val.value });
           }}
           options={ps_in}
+        /> */}
+        <input
+          id="new"
+          disabled={this.state.disabled}
+          onChange={(e) =>
+            this.setState({
+              PsRegion: e.target.value,
+            })
+          }
+          style={{ alignSelf: "center", width: "75%", padding: "10px 5px" }}
         />
-        {/* <input
-            id="new"
-            disabled={this.state.disabled}
-            onChange={(e) =>
-              this.setState({
-                PsRegion: e.target.value,
-              })
-            }
-            style={{ alignSelf: "center", width: "75%",padding: "10px 5px" }}
-		/> */}
         <div
           style={{
             marginTop: "20px",
