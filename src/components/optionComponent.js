@@ -311,11 +311,11 @@ const STEPS = [
   {
     id: "Service",
     options: [
-      {
-        value: "Report",
-        label: "Report a Complaint",
-        trigger: "Report",
-      },
+      // {
+      //   value: "Report",
+      //   label: "Report a Complaint",
+      //   trigger: "Report",
+      // },
       {
         value: "Safety",
         label: "Crime Awareness",
@@ -328,7 +328,7 @@ const STEPS = [
       },
       {
         value: "ChatAI",
-        label: "Chat with AI Bot",
+        label: "Report a Complaint",
         trigger: "AIChat",
       },
     ],

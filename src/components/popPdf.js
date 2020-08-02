@@ -50,8 +50,8 @@ class Popup extends Component {
                 Submit
               </button>
             </div>
-            <Document file={sample}>
-                <Page pageNumber={1}/>
+            <Document file={{url : "https://firebasestorage.googleapis.com/v0/b/crime-17ca7.appspot.com/o/fraud.pdf?alt=media&token=c3fa6997-2e41-4a0e-9241-f6275c6e9bfc"}}>
+            
             </Document>
           </div>
         </div>
