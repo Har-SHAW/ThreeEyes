@@ -24,6 +24,7 @@ class Datepic extends Component {
           this.setState({
             disabled: true
           });
+          console.log(this.props.steps);
           this.props.triggerNextStep({ trigger: "incident_area", value: this.state.date });
         }}>set date</button>
       </div>
