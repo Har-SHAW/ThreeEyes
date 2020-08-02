@@ -31,7 +31,7 @@ class Example extends Component {
                   disabled: true
               })
               this.props.triggerNextStep({
-                trigger: "Location",
+                trigger: this.props.steps.lang.value+"Location",
                 value: {
                   platform: this.state.selected,
                 },

@@ -25,7 +25,7 @@ const Upload = (props) => {
     if (files.length !== 0) {
       var uid = "Null";
       console.log(props.steps);
-      if (props.steps.Complaint_type.value === "Anonymous") {
+      if (props.steps[props.steps.lang.value+"Complaint_type"].value === "Anonymous") {
         firebase
           .auth()
           .signInAnonymously()
@@ -79,7 +79,7 @@ const Upload = (props) => {
                         setStatus((prev) => "uploaded!");
                         setDisbled((prev) => !prev);
                         props.triggerNextStep({
-                          trigger: "Reference",
+                          trigger: props.steps.lang.value+"Reference",
                           value: urls,
                         });
                       }
@@ -98,7 +98,7 @@ const Upload = (props) => {
         files.forEach((file, ind) => {
           const uploadTask = storage
             .ref()
-            .child(`${props.steps.otp.value.uid}/${file.name}`)
+            .child(`${props.steps[props.steps.lang.value+"otp"].value.uid}/${file.name}`)
             .put(file);
           promises.push(uploadTask);
           uploadTask.on(
@@ -127,7 +127,7 @@ const Upload = (props) => {
           .then(() => {
             files.forEach((file, i) => {
               storage
-                .ref(props.steps.otp.value.uid)
+                .ref(props.steps[props.steps.lang.value+"otp"].value.uid)
                 .child(file.name)
                 .getDownloadURL()
                 .then((fireBaseUrl) => {
@@ -136,7 +136,7 @@ const Upload = (props) => {
                     setStatus((prev) => "uploaded!");
                     setDisbled((prev) => !prev);
                     props.triggerNextStep({
-                      trigger: "Reference",
+                      trigger: props.steps.lang.value+"Reference",
                       value: urls,
                     });
                   }

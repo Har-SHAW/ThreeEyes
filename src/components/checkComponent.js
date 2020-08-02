@@ -1,8 +1,8 @@
 import React , { Component } from 'react';
  class Check extends Component {
      componentWillMount(){
-         console.log(this.props.steps.Category.value);
-         this.props.steps.Category.value === 'Child Sex Abuse/Rape/Obstacenity' ? this.props.triggerNextStep({ trigger: "Categoty_CRSO" }) : this.props.triggerNextStep({ trigger: "Cyber_type"});
+         console.log(this.props.steps[this.props.steps.lang.value+"Category"].value);
+         this.props.steps[this.props.steps.lang.value+"Category"].value === 'Child Sex Abuse/Rape/Obstacenity' ? this.props.triggerNextStep({ trigger: this.props.steps.lang.value+"Categoty_CRSO" }) : this.props.triggerNextStep({ trigger: this.props.steps.lang.value+"Cyber_type"});
      }
      render(){
          return(

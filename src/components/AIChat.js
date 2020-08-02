@@ -25,12 +25,13 @@ class AIChat extends Component {
     //   params
     // );
     console.log(res);
-    console.log(this.props.steps);
+    console.log(this.props.steps[this.props.steps.lang.value+"Service"].value);
     this.setState({
       msg: res.data.split("^")[0],
     });
+
     this.props.triggerNextStep({
-      trigger: res.data.split("^")[1] === undefined ? "zero" : "shaw",
+      trigger: res.data.split("^")[1] === undefined ? this.props.steps.lang.value+"zero" : this.props.steps.lang.value+"shaw",
       value: res.data.split("^")[1] === undefined ? "" : res.data.split("^"),
     });
   }

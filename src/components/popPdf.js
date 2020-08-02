@@ -1,58 +1,70 @@
 import React, { Component } from "react";
+import { Document, Page } from "react-pdf/dist/entry.webpack";
+import sample from "./fraud.pdf";
 
-import { Document, Page } from 'react-pdf';
+class Pdf extends Component {
+  state = { numPages: null, pageNumber: 1 };
 
-import sample from './fraud.pdf'
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
+  };
+
+  goToPrevPage = () =>
+    this.setState((state) => ({ pageNumber: state.pageNumber - 1 }));
+  goToNextPage = () =>
+    this.setState((state) => ({ pageNumber: state.pageNumber + 1 }));
+
+  render() {
+    const { pageNumber, numPages } = this.state;
+
+    return (
+      <div>
+        <nav>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+          </div>
+        </nav>
+
+        <div>
+          <Document file={sample} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <Page pageNumber={pageNumber} width={450}/>
+          </Document>
+        </div>
+
+        {/* <p>
+          Page {pageNumber} of {numPages}
+        </p> */}
+      </div>
+    );
+  }
+}
 
 class Popup extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      mdata: []
-    }
-  }
-
-  mapdata(data){
-    this.setState({
-      mdata: data
-    })
-  }
-
   render() {
     return (
       <div className="popup">
         <div className="popup_inner">
           <div
             style={{
-              paddingBottom: "10px",
-              backgroundColor: "#EF6C00",
-              borderRadius: "10px",
+              backgroundColor: "transparent",
+              width: "100%",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "space-between",
-              }}
-            >
-              <div style={{ margin: "20px", color: "white" }}>
-                Click on the places to mark them and click on the marker to remove them 
-              </div>
-              <button
-                style={{ margin: "10px" }}
+            <button
                 className="button1"
                 onClick={() => {
                   this.props.closePopup();
                 }}
               >
-                Submit
+                close
               </button>
-            </div>
-            <Document file={{url : "https://firebasestorage.googleapis.com/v0/b/crime-17ca7.appspot.com/o/fraud.pdf?alt=media&token=c3fa6997-2e41-4a0e-9241-f6275c6e9bfc"}}>
-            
-            </Document>
+
+            <Pdf />
           </div>
         </div>
       </div>
@@ -81,18 +93,10 @@ class PopMain extends Component {
             disabled={this.state.disabled}
             onClick={this.togglePopup.bind(this)}
           >
-            Show Document
+            Show Map
           </button>
           {this.state.showPopup ? (
-            <Popup
-              closePopup={this.togglePopup.bind(this)}
-              next={(mdata) => {
-                this.setState({
-                  disabled: !this.state.disabled,
-                });
-                this.props.triggerNextStep({ trigger: "update", value: mdata });
-              }}
-            />
+            <Popup closePopup={this.togglePopup.bind(this)} />
           ) : null}
         </div>
       </div>

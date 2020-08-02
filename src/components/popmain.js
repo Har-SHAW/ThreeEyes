@@ -86,7 +86,7 @@ class PopMain extends Component {
                 this.setState({
                   disabled: !this.state.disabled,
                 });
-                this.props.triggerNextStep({ trigger: "update", value: mdata });
+                this.props.triggerNextStep({ trigger: this.props.steps.lang.value+"update", value: mdata });
               }}
             />
           ) : null}

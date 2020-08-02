@@ -140,7 +140,7 @@ class Sdrop extends Component {
                   isStatus: false,
                 });
                 this.props.triggerNextStep({
-                  trigger: "explanation",
+                  trigger: this.props.steps.lang.value+"explanation",
                   value: {
                     state: this.state.state,
                     district: this.state.dist,
