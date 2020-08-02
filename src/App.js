@@ -3,6 +3,7 @@ import "./App.css";
 import Main from "./components/MainComponent";
 import Party from "./components/ParticlesReact";
 import HomePage from "./components/HomePage";
+
 class App extends Component {
   render() {
     return (

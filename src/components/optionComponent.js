@@ -300,7 +300,7 @@ const STEPS = [
   {
     id: "3.3",
     message:
-      " 3 . Enlighten you with several safety tips that you might want to follow so that you would use me less in future :)",
+      " 3 . Enlighten you with several crime awareness tips that you might want to follow so that you would use me less in future :)",
     trigger: "serv",
   },
   {
@@ -318,7 +318,7 @@ const STEPS = [
       },
       {
         value: "Safety",
-        label: "Safety Tips",
+        label: "Crime Awareness",
         trigger: "Safe",
       },
       {
