@@ -993,6 +993,11 @@ const STEPS = [
     message: "हम अपनी चैट जारी रख सकते हैं",
     trigger: "hin-zero",
   },
+  {
+    id:"hin-errZero",
+    message:"कृपया 2-3 पंक्तियों में समान जानकारी प्रदान करें(आप बाद में पूरा विवरण बाद में जोड़ सकते हैं)",
+    trigger:"hin-zero"
+  },
 
 
   //f:english
@@ -1725,6 +1730,11 @@ const STEPS = [
     id: "shaw1",
     message: "We can continue our chat",
     trigger: "zero",
+  },
+  {
+    id:"errZero",
+    message:"Please provide the same information in 2-3 lines(You can later add whole description later)",
+    trigger:"zero"
   },
 
 
