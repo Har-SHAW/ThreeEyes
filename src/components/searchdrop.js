@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import "../App.css";
 import slst from "./StateDistrict";
-import PS_In from "./psComponent";
+//import PS_In from "./psComponent";
 
 class Sdrop extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class Sdrop extends Component {
 
   render() {
     const opts = slst.map((l) => ({ label: l.state, value: l.state }));
-    const ps_in = PS_In.map((l) => ({ label: l.id, value: l.value }));
+    //const ps_in = PS_In.map((l) => ({ label: l.id, value: l.value }));
     return (
       <div style={{ width: "100%" }}>
         <div
@@ -87,7 +87,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>Enter PS Region</label>
+          <label>Enter PS Region/Pin Code</label>
         </div>
         <div
           style={{
@@ -111,7 +111,7 @@ class Sdrop extends Component {
               PsRegion: e.target.value,
             })
           }
-          style={{ alignSelf: "center", width: "75%", padding: "10px 5px" }}
+          style={{ alignSelf: "center", width: "100%", padding: "10px 5px" }}
         />
         <div
           style={{

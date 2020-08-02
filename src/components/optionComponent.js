@@ -941,7 +941,7 @@ const STEPS = [
   {
     id: "final_end",
     message:
-      "$Thank You for using me. I am always available just a click away for your service . Bye",
+      "Thank You for using me. I am always available just a click away for your service . Bye",
     end: true,
   },
   /* Card Component */
