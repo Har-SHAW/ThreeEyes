@@ -20,10 +20,13 @@ class AIChat extends Component{
             }
         }
         let res = await axios.post('https://us-central1-webappmedia-2aa4d.cloudfunctions.net/dialogflowGateway', params);
+        //let res = await axios.post('https://us-central1-crime-17ca7.cloudfunctions.net/dialogflowGateway', params);
         console.log(res);
+        //console.log(this.props.steps)
         this.setState({
             msg : res.data
         })
+        //this.props.shaw.value = 1;
         this.props.triggerNextStep({ trigger: "zero" });
     }
 

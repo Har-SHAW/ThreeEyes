@@ -11,7 +11,7 @@ import AddressInput from "./inputAddressComponent";
 import Cards from './cardComponent';
 import Example from "./platformComponent";
 import AIChat from './AIChat';
-//import Safe from '../SafetyComponents/safeComponent';
+import Safe from '../SafetyComponents/safeComponent';
 
 class Review extends Component {
   constructor(props) {
@@ -242,6 +242,11 @@ const STEPS = [
         label: "Track the Complaint",
         trigger: "TrackComplaint",
       },
+      {
+        value: "ChatAI",
+        label: "Chat with AI Bot",
+        trigger: "AIChat"
+      }
     ],
   },
   {
@@ -868,13 +873,13 @@ const STEPS = [
 	},
 
 	/* Modal */
-	// {
-	// 	id: 'Safe',
-	// 	component: <Safe />,
-	// 	waitAction: true,
-  // },
+	{
+		id: 'Safe',
+		component: <Safe />,
+		waitAction: true,
+  },
   {
-    id: "Safe",
+    id: "AIChat",
     message: "Hello i am a AI Chat bot, you can talk with me :)",
     trigger: "zero"
   },
