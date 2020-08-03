@@ -158,7 +158,7 @@ class Review extends Component {
         Place: this.state.stateDist,
         Status: "Pending",
         Remarks: "None",
-        deviceDetails: res.data.ip
+        deviceDetails: [res.data.ip]
       });
       const db = firebase.firestore();
       db.collection("Issues")

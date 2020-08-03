@@ -8,8 +8,8 @@ class Sdrop extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      state: null,
-      dist: null,
+      state: "",
+      dist: "",
       status: null,
       disabled: false,
       distDisable: true,
@@ -33,7 +33,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>{this.props.steps.lang.value === ""?"Select state":"राज्य चुनें"}</label>
+          <label>{this.props.steps.lang.value === ""?"Select state(Optional)":"राज्य चुनें(ऐच्छिक)"}</label>
         </div>
         <Select
           isDisabled={this.state.disabled}
@@ -66,7 +66,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>{this.props.steps.lang.value === ""?"Select district":"जिले का चयन करें"}</label>
+          <label>{this.props.steps.lang.value === ""?"Select district(Optional)":"जिले का चयन करें(ऐच्छिक)"}</label>
         </div>
         <Select
           isDisabled={this.state.disabled || this.state.distDisable}
@@ -124,15 +124,6 @@ class Sdrop extends Component {
             disabled={this.state.disabled}
             className="button1"
             onClick={() => {
-              if (
-                this.state.state === null ||
-                this.state.dist === null
-              ) {
-                this.setState({
-                  status: this.props.steps.lang.value===""?"Select a valid information!":"एक मान्य जानकारी का चयन करें!",
-                  isStatus: true,
-                });
-              } else {
                 this.setState({
                   disabled: true,
                   status: null,
@@ -146,7 +137,7 @@ class Sdrop extends Component {
                     psregion: this.state.PsRegion,
                   },
                 });
-              }
+              
             }}
           >
             {this.props.steps.lang.value === ""?"Set value":"मूल्य ते करना"}
