@@ -12,7 +12,7 @@ import Cards from "./cardComponent";
 import Example from "./platformComponent";
 import AIChat from "./AIChat";
 import Safe from "../SafetyComponents/safeComponent";
-import PopPdf from "./popPdf";
+const axios = require('axios')
 
 class Review extends Component {
   constructor(props) {
@@ -32,13 +32,13 @@ class Review extends Component {
   componentWillMount() {
     const { steps } = this.props;
     console.log(steps);
-    if (steps[this.props.steps.lang.value+"Service"].value !== "ChatAI") {
+    if (steps[this.props.steps.lang.value+"Service"].value !== this.props.steps.lang.value+"ChatAI") {
       if ("") console.log("Yes it is present");
       this.state.cl.push("" + steps[this.props.steps.lang.value+"Select_date.value"] + "");
       this.state.cl.push(steps[this.props.steps.lang.value+"desc"].value);
       var i;
-      for (i = 0; i < steps[this.props.steps.lang.value+"ch_plat.value.platform"].length; i++) {
-        this.state.cl.push(steps[this.props.steps.lang.value+"ch_plat.value.platform"][i].value);
+      for (i = 0; i < steps[this.props.steps.lang.value+"ch_plat"].value.platform.length; i++) {
+        this.state.cl.push(steps[this.props.steps.lang.value+"ch_plat"].value.platform[i].value);
       }
       this.state.stateDist.push(steps[this.props.steps.lang.value+"incident_menu"].value.state);
       this.state.stateDist.push(steps[this.props.steps.lang.value+"incident_menu"].value.district);
@@ -171,7 +171,7 @@ class Review extends Component {
           Place: this.state.stateDist,
           Status: "Pending",
           Remarks: "None",
-          deviceDetails: res.data.ip
+          deviceDetails: [res.data.ip]
         })
         .then((data) => {
           console.log(data.id);
@@ -204,7 +204,7 @@ class Review extends Component {
           Place: this.state.stateDist,
           Status: "Pending",
           Remarks: "None",
-          deviceDetails: "Cannot read Ip address"
+          deviceDetails: ["Cannot read Ip address"]
         })
         .then((data) => {
           console.log(data.id);
@@ -295,11 +295,6 @@ const STEPS = [
         value:"hin-",
         label:"हिन्दी",
         trigger:"hin-Greetings"
-      },
-      {
-        value:"tel-",
-        label:"తెలుగు",
-        trigger:"tel-Greetings"
       }
     ]
   },

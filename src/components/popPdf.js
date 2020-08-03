@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import { Document, Page } from "react-pdf/dist/entry.webpack";
-import jobF from "./jobFraud.pdf"
-import MatrimonialF  from "./matrimonialFraud.pdf"
-import securityA from "./securityAwareness.pdf"
-import socialAwareness from "./socialMedia.pdf"
-import Fraud from "./fraud.pdf"
 
 const list = []
 class Pdf extends Component {
-  constructor(props){
-    super(props);
-  }
-
  SimpleList = () => (
    <div>
       {list.map(item => (
