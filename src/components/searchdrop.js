@@ -87,7 +87,7 @@ class Sdrop extends Component {
             marginBottom: "5px",
           }}
         >
-          <label>{this.props.steps.lang.value === ""?"Enter PS Region/Pin Code":"PS क्षेत्र दर्ज करें/पिन कोड"}</label>
+          <label>{this.props.steps.lang.value === ""?"Enter PS Region/Pin Code(Optional)":"PS क्षेत्र दर्ज करें/पिन कोड(ऐच्छिक)"}</label>
         </div>
         <div
           style={{
@@ -126,8 +126,7 @@ class Sdrop extends Component {
             onClick={() => {
               if (
                 this.state.state === null ||
-                this.state.dist === null ||
-                this.state.PsRegion === ""
+                this.state.dist === null
               ) {
                 this.setState({
                   status: this.props.steps.lang.value===""?"Select a valid information!":"एक मान्य जानकारी का चयन करें!",

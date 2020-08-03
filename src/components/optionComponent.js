@@ -19,12 +19,13 @@ class Review extends Component {
     super(props);
     this.state = {
       status: "",
-      docId: "Loading please wait ...",
+      docId: this.props.steps.lang.value === ""?"Loading please wait ...":"लोड हो रहा है कृपया प्रतीक्षा करें",
       cl: [],
       attachments: [],
       location: [],
       doneBy: [],
       stateDist: [],
+      deviceDetails: []
     };
   }
 
@@ -145,19 +146,10 @@ class Review extends Component {
       for (i = 0; i < steps[this.props.steps.lang.value+"zero1"].value.length; i++)
           this.state.cl.push(steps[this.props.steps.lang.value+"zero1"].value[i]);
     }
-    console.log({
-      Attachments: this.state.attachments,
-      created: "" + Date().toString() + "",
-      Description: this.state.cl,
-      DoneBy: this.state.doneBy,
-      Location: this.state.location,
-      Place: this.state.stateDist,
-      Status: "Pending",
-      Remarks: "None",
-    });
-    const db = firebase.firestore();
-    db.collection("Issues")
-      .add({
+
+    axios.get('https://api.ipify.org/?format=json').then((res)=>{
+      console.log(res.data.ip);
+      console.log({
         Attachments: this.state.attachments,
         created: "" + Date().toString() + "",
         Description: this.state.cl,
@@ -166,14 +158,63 @@ class Review extends Component {
         Place: this.state.stateDist,
         Status: "Pending",
         Remarks: "None",
-      })
-      .then((data) => {
-        console.log(data.id);
-        this.setState({
-          docId: data.id,
-        });
-      })
-      .catch((err) => console.log(err));
+        deviceDetails: res.data.ip
+      });
+      const db = firebase.firestore();
+      db.collection("Issues")
+        .add({
+          Attachments: this.state.attachments,
+          created: "" + Date().toString() + "",
+          Description: this.state.cl,
+          DoneBy: this.state.doneBy,
+          Location: this.state.location,
+          Place: this.state.stateDist,
+          Status: "Pending",
+          Remarks: "None",
+          deviceDetails: res.data.ip
+        })
+        .then((data) => {
+          console.log(data.id);
+          this.setState({
+            docId: data.id,
+          });
+        })
+        .catch((err) => console.log(err));
+    }).catch((err)=>{
+      console.log(err)
+      console.log({
+        Attachments: this.state.attachments,
+        created: "" + Date().toString() + "",
+        Description: this.state.cl,
+        DoneBy: this.state.doneBy,
+        Location: this.state.location,
+        Place: this.state.stateDist,
+        Status: "Pending",
+        Remarks: "None",
+        deviceDetails: "Cannot read Ip address"
+      });
+      const db = firebase.firestore();
+      db.collection("Issues")
+        .add({
+          Attachments: this.state.attachments,
+          created: "" + Date().toString() + "",
+          Description: this.state.cl,
+          DoneBy: this.state.doneBy,
+          Location: this.state.location,
+          Place: this.state.stateDist,
+          Status: "Pending",
+          Remarks: "None",
+          deviceDetails: "Cannot read Ip address"
+        })
+        .then((data) => {
+          console.log(data.id);
+          this.setState({
+            docId: data.id,
+          });
+        })
+        .catch((err) => console.log(err));
+    })
+    
   }
   render() {
     return (
@@ -182,8 +223,8 @@ class Review extends Component {
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >
           <div>
-            <p>Your Data is Saved Succefully</p>
-            <p>Your Document id is: </p>
+            <p>{this.props.steps.lang.value === ""?"Your Data is Saved Successfully":"आपका डेटा सफलतापूर्वक सहेजा गया है"}</p>
+            <p>{this.props.steps.lang.value === ""?"Your Document id is: ":"आपका दस्तावेज़ आईडी आईडी"}</p>
             <strong
               style={{
                 margin: "5px",
@@ -201,10 +242,10 @@ class Review extends Component {
         <div
           style={{ display: "flex", width: "100%", justifyContent: "center" }}
         >
-          {this.state.docId !== "Loading please wait ..." ? (
+          {this.state.docId !== "Loading please wait ..."|| this.state.docId !== "लोड हो रहा है कृपया प्रतीक्षा करें"? (
             <CopyToClipboard
               text={this.state.docId}
-              onCopy={() => this.setState({ status: "Copied!" })}
+              onCopy={() => this.setState({ status: this.props.steps.lang.value === ""?"Copied!":"की नकल की" })}
             >
               <button
                 className="button1"
@@ -212,7 +253,7 @@ class Review extends Component {
                   this.props.triggerNextStep({ trigger: "end_greet" });
                 }}
               >
-                Copy id to clipboard
+                {this.props.steps.lang.value === ""?"Copy id to clipboard":"क्लिपबोर्ड पर कॉपी करें"}
               </button>
             </CopyToClipboard>
           ) : null}
