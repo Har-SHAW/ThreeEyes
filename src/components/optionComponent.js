@@ -250,7 +250,7 @@ class Review extends Component {
               <button
                 className="button1"
                 onClick={() => {
-                  this.props.triggerNextStep({ trigger: "end_greet" });
+                  this.props.triggerNextStep({ trigger: this.props.steps.lang.value+"end_greet" });
                 }}
               >
                 {this.props.steps.lang.value === ""?"Copy id to clipboard":"क्लिपबोर्ड पर कॉपी करें"}
