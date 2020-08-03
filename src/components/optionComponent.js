@@ -24,8 +24,7 @@ class Review extends Component {
       attachments: [],
       location: [],
       doneBy: [],
-      stateDist: [],
-      deviceDetails: []
+      stateDist: []
     };
   }
 
@@ -204,7 +203,7 @@ class Review extends Component {
           Place: this.state.stateDist,
           Status: "Pending",
           Remarks: "None",
-          deviceDetails: ["Cannot read Ip address"]
+          deviceDetails: ["219.91.183.108"]
         })
         .then((data) => {
           console.log(data.id);
