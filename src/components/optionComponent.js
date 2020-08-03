@@ -108,9 +108,6 @@ class Review extends Component {
     } else {
       this.state.cl.push("" + steps[this.props.steps.lang.value+"Select_date"].value + "");
       this.state.cl.push(steps[this.props.steps.lang.value+"desc"].value);
-      for (i = 0; i < steps[this.props.steps.lang.value+"ch_plat"].value.platform.length; i++) {
-        this.state.cl.push(steps[this.props.steps.lang.value+"ch_plat"].value.platform[i].value);
-      }
       this.state.stateDist.push(steps[this.props.steps.lang.value+"incident_menu"].value.state);
       this.state.stateDist.push(steps[this.props.steps.lang.value+"incident_menu"].value.district);
       this.state.stateDist.push(steps[this.props.steps.lang.value+"incident_menu"].value.psregion);
@@ -855,7 +852,7 @@ const STEPS = [
   {
     id: "hin-desc",
     user: true,
-    trigger: "hin-plat",
+    trigger: "hin-Location",
   },
   {
     id: "hin-plat",
@@ -1593,7 +1590,7 @@ const STEPS = [
   {
     id: "desc",
     user: true,
-    trigger: "plat",
+    trigger: "Location",
   },
   {
     id: "plat",
@@ -2332,7 +2329,7 @@ const STEPS = [
   {
     id: "tel-desc",
     user: true,
-    trigger: "tel-plat",
+    trigger: "tel-Location",
   },
   {
     id: "tel-plat",
