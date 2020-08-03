@@ -279,7 +279,7 @@ class Review extends Component {
 const STEPS = [
   {
     id: "language",
-    message: "Please select a Language/ कृपया भाषा चुनें/ దయచేసి భాషను ఎంచుకోండి",
+    message: "Please select a Language/ कृपया भाषा चुनें",
     trigger: "lang"
   },
   {
