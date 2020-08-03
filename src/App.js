@@ -21,7 +21,7 @@ class App extends Component {
       >
         <Main />
         <Party />
-        <div style={{ position: "absolute", top: "0", left: "0" }}>
+        <div style={{ position: "absolute", top: "0", right: "50vw" }}>
           <HomePage />
         </div>
       </div>
