@@ -4,6 +4,7 @@ import jobF from "../components/jobFraud.pdf"
 import MatrimonialF  from "../components/matrimonialFraud.pdf"
 import securityA from "../components/securityAwareness.pdf"
 import socialAwareness from "../components/socialMedia.pdf"
+import fraud from "../components/fraud.pdf"
 import Poppdf from "../components/popPdf.js"
 
 class Safe extends Component{
@@ -70,13 +71,11 @@ class Safe extends Component{
                 <Card body inverse color="white">
                         <CardTitle style={{color: 'black'}}>Safety Tips</CardTitle>
                         <CardBody style={{color: 'white'}}>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal1} style={{marginBottom: '20px'}}>  Online Fraud/Scam </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal2} style={{marginBottom: '20px'}}> Social Media Safety </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal3} style={{marginBottom: '20px'}}> Online Bullying </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal4} style={{marginBottom: '20px'}}> Financial Fraud </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal5} style={{marginBottom: '20px'}}> Employment Fraud </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal6} style={{marginBottom: '20px'}}> Matrimonial Fraud </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal7} style={{marginBottom: '20px'}}> Mobile Hacking </Button>
+                            <Poppdf Pdfsrc={socialAwareness} Bntxt=" Social Media Safety "/>
+                            <Poppdf Pdfsrc={fraud} Bntxt=" Financial Fraud "/>
+                            <Poppdf Pdfsrc={MatrimonialF} Bntxt=" Matrimonial Fraud "/>
+                            <Poppdf Pdfsrc={fraud} Bntxt=" Financial Fraud "/>
+                            <Poppdf Pdfsrc={jobF} Bntxt=" Employment Fraud "/>
                         </CardBody>
                     </Card>
                     <Modal isOpen={this.state.isModalOpen1} toggle={this.toggleModal1} className="modal-lg modal-content rounded-3" style={{borderRadius: '10px'}}>
