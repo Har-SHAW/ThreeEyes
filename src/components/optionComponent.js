@@ -1564,7 +1564,7 @@ const STEPS = [
   /* Date Module Begins  */
   {
     id: "Date_module",
-    message: "Select the Date of happened?:",
+    message: "Select the Date when incident has taken place?",
     trigger: "Select_date",
   },
   {
@@ -1724,7 +1724,7 @@ const STEPS = [
   },
   {
     id: "AIChat",
-    message: "Hello i am a AI Chat bot, you can talk with me :)",
+    message: "Describe your situation",
     trigger: "zero",
   },
   {
